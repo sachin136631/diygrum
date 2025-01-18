@@ -9,7 +9,7 @@ const Forms = () => {
                 <input
                     type="text"
                     value={relation}
-                    placeholder='Enter the relationship between elements separated by "->"'
+                    placeholder='Enter your code'
                     onChange={(e)=>setRelation(e.target.value)}
 
                 />
