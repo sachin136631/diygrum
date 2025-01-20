@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-const Forms = () => {
-    const [relation,setRelation]=useState("");
+const Forms = ({onSubmit}) => {
+    const [relation,setrelation]=useState("");
+    const handleinputchange=(event)=>{
+      setrelation(event.target.value);
+    }
+    const handlesubmit=(event)=>{
+      event.preventDefault();
+      alert(`relation submitted ${relation}`);
+      onSubmit({relation});
+    }
   return (
     <div>
-        <form>
-            <label>
-                <input
-                    type="text"
-                    value={relation}
-                    placeholder='Enter your code'
-                    onChange={(e)=>setRelation(e.target.value)}
-
-                />
-            </label>
-        </form>
+      <form onSubmit={handlesubmit}>
+        <label>
+          <input
+            type='text'
+            id='relation'
+            value={relation}
+            onChange={handleinputchange}
+            placeholder='enter the relations'
+          />
+          <button type='submit'>Submit</button>
+        </label>
+        
+      </form>
       
     </div>
   )
 }
-
 export default Forms
