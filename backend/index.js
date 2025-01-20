@@ -2,7 +2,7 @@ import express from "express";
 import axios from "axios";
 import cors from "cors";
 import dotenv from "dotenv";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import {GoogleGenerativeAI} from "@google/generative-ai";
 dotenv.config();
 const app = express();
 const genAI=new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
@@ -33,11 +33,14 @@ app.post("/generate-diagram", async (req, res) => {
 });
 
 app.post("/gemini",async(req,res)=>{
-    const {prompt}=req.body;
-    if (!prompt) {
-        return res.status(400).json({ message: "Prompt is required." }); 
-    }
+    const {text}=req.body;
+    console.log("the text from frontend is ",text);
+
+     if (!text) {
+         return res.status(400).json({ message: "text is required." }); 
+     }
     try{
+        const prompt= `convert the following text to this format "digraph S{A->B}" where A and B represents the two subjects the sentence refers to ${text}`
         const model=genAI.getGenerativeModel({model:"gemini-1.5-flash"});
         const result = await model.generateContent(prompt);
         res.status(200).json({response:result.response.text()});
