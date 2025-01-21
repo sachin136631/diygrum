@@ -11,20 +11,20 @@ app.use(express.json());
 
 
 app.post("/generate-diagram", async (req, res) => {
-    const { diagramSource, diagramType, outputFormat, diagramOptions } = req.body;
+    const {diagramSource} = req.body;
 
     try {
         
-        const response = await axios.post("https://kroki.io/", {
-            diagram_source: diagramSource,
-            diagram_type: diagramType,
-            output_format: outputFormat,
-            diagram_options: diagramOptions,  
+        const response = await axios.post("https://kroki.io", {
+            diagram_source: diagramSource, 
+            diagram_type:'graphviz',
+            output_format:'svg',
         }, {
             headers: {
                 "Content-Type": "application/json",
             }
-        });        
+        })
+        console.log("request kittitind");        
         res.status(200).send(response.data);
     } catch (error) {
         console.error("Error making API call to Kroki:", error);
