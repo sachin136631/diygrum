@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-const Visualiser = () => {
+const Visualiser = ({resp}) => {
   return (
     <div>
-      
+      <h1>the value of response is{typeof resp === "object" ? JSON.stringify(resp.response):resp ||"No response received yet. "}</h1>
     </div>
   )
 }
